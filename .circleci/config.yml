@@ -1,0 +1,62 @@
+version: 2.1
+orbs:
+  # orgs contain basc recipes and reproducible actions (install node, aws, elb, etc.)
+  node: circleci/node@4.1.0
+  aws-cli: circleci/aws-cli@2.0.3
+  browser-tools: circleci/browser-tools@1.2.2
+  aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
+
+jobs:
+  build:
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - node/install
+      - checkout
+      - browser-tools/install-chrome
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_DEFAULT_REGION
+      - aws-elastic-beanstalk/setup
+      # install dependencies in both apps
+      - run:
+          name: Frontend install
+          command: |
+            npm run frontend:install
+      - run:
+          name: Backend install
+          command: |
+            npm run backend:install
+      # Build both frontend and backend
+      - run:
+          name: Frontend Build
+          command: |
+            npm run frontend:build
+      - run:
+          name: Backend Build
+          command: |
+            npm run backend:build
+
+      # Run test on frontend
+      - run:
+          name: Test Frontend
+          command: |
+            npm run test:frontend
+
+      - run:
+          name: Deploy Frontend
+          command: | 
+            npm run deploy:frontend
+      - run:
+          name: Deploy Backend
+          command: |
+            npm run deploy:backend
+
+workflows:
+  build_test_deploy:
+    jobs:
+      - build:
+        filters:
+          branches:
+            only: master
