@@ -10,7 +10,7 @@
     "test": "chmod +x ./bin/test.sh && ./bin/test.sh",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "npm run build && aws s3 cp --recursive --acl public-read ./www s3://udagramfrontendng/"
+    "deploy": "npm run build && aws s3 cp --recursive --acl public-read ./www s3://shrouk-udagram/"
   },
   "private": true,
   "dependencies": {
