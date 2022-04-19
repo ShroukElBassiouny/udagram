@@ -6,10 +6,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider; ng build --prod",
+    "test": "chmod +x ./bin/test.sh && ./bin/test.sh",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "npm run build && aws s3 cp --recursive --acl public-read ./www s3://udagramfrontendng/"
   },
   "private": true,
   "dependencies": {

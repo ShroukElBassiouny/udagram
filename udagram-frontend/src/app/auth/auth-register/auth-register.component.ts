@@ -38,7 +38,9 @@ export class AuthRegisterComponent implements OnInit {
   onSubmit($event) {
     $event.preventDefault();
 
+
     if (!this.registerForm.valid) { return; }
+
 
     const newuser: User = {
       email: this.registerForm.controls.email.value,

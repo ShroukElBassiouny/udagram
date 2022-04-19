@@ -11,5 +11,6 @@ const components = [];
   declarations: components,
   exports: components,
   providers: []
+  
 })
 export class ApiModule {}
