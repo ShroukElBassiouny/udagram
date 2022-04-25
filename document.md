@@ -20,9 +20,6 @@
 
 Full Stack app hosted on the AWS Cloud.
 
-[![Screenshot((168)](https://user-images.githubusercontent.com/63310514/165173341-4c0f1127-5836-4747-bc61-90aba85741c1.png)](https://app.circleci.com/pipelines/github/ShroukElBassiouny/udagram/54/workflows/3cdb2d48-f5f2-4c9e-8b72-39b19a1d7b91/jobs/62)
-
-
 ## AWS RDS 
 
 The Postgres Database is on an RDS instance. The RDS instance is configured to automatically scale up and down based on the number of requests.
